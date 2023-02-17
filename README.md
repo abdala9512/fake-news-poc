@@ -41,3 +41,7 @@ Desarrollar un modelo de clasificación automática de noticias falsas asociadas
 * El proyecto se desarrolló en python `3.10`
 * 
 
+## Resultados
+
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1O0JwJDY9iK6ctFNng0v03WkwsSOSR3zo?usp=sharing)
+
