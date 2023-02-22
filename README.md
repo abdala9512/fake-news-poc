@@ -5,7 +5,7 @@
 
 
 
-## Integrantes
+## Integrantes Estudiantes
 
 * David Rincón Piñeros
 * Giovanni Jímenez Prieto
