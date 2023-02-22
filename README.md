@@ -9,8 +9,8 @@
 
 * David Rincón Piñeros
 * Giovanni Jímenez Prieto
-* Leonardo Restrepo
-* Miguel Arquez abdala
+* Leonardo Restrepo Alvarez
+* Miguel Arquez Abdala
 
 # Reto analítico - Fake News
 
