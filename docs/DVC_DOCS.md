@@ -2,14 +2,19 @@
 
 ![](https://repository-images.githubusercontent.com/83878269/a5c64400-8fdd-11ea-9851-ec57bc168db5)
 
-## Data versioning steps
+## Pasos para versionar datos
 
-### Set DVC remote
+### Configurar el servidor remoto de DVC
+En nuestro caso es https://dagshub.com/abdala9512/fake-news-poc.dvc, de dagshub.
 ```
 dvc remote add origin https://dagshub.com/abdala9512/fake-news-poc.dvc
 ```
 
-### Push new data
+### Hacer push de nuevos datos
+
+1. Hacemos un add de los datos
+2. subimos la nueva config a github
+3. hacemos push de los datos
 ```
 # Add new generated data 
 dvc add data/
