@@ -9,6 +9,7 @@ En nuestro caso es https://dagshub.com/abdala9512/fake-news-poc.dvc, de dagshub.
 ```
 pip install dvc
 dvc remote add origin https://dagshub.com/abdala9512/fake-news-poc.dvc
+dvc remote default origin
 ```
 
 
