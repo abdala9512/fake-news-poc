@@ -6,6 +6,13 @@ name = "pypi"
 [packages]
 pandas = "*"
 dvc = "*"
+scikit-learn = "*"
+umap-learn = "*"
+stanza = "*"
+matplotlib = "*"
+mlflow = "*"
+gensim = "*"
+python-dotenv = "*"
 
 [dev-packages]
 jupyterlab = "*"
