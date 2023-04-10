@@ -13,6 +13,8 @@ matplotlib = "*"
 mlflow = "*"
 gensim = "*"
 python-dotenv = "*"
+hyperopt = "*"
+xgboost = "*"
 
 [dev-packages]
 jupyterlab = "*"
