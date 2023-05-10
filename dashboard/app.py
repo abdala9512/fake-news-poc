@@ -2,24 +2,21 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.figure_factory as ff
+import openai
+
+from dash_function import get_completion
 
 # MULTIPAGE APP
 # https://docs.streamlit.io/library/get-started/multipage-apps/create-a-multipage-app
 
-
 # Configs
 st.set_page_config(layout="wide")
 
-
-st.title("Fake News Detection")
-st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Javeriana.svg/600px-Javeriana.svg.png", width=200)
-st.sidebar.title("Fake News Detection")
-
-st.markdown("Esta aplicacion web permite detectar noticias falsas")
+# SIDE BAR ---------------------------------------------------------
 
 st.sidebar.markdown("Esta aplicacion web permite detectar noticias falsas")
-
 st.sidebar.subheader("Ingrese el texto de la noticia")
+st.sidebar.title("Fake News Detection")
 text = st.sidebar.text_area("Noticia")
 st.sidebar.subheader("Ingrese URL de la noticia")
 url_text = st.sidebar.text_area("URL")
@@ -27,6 +24,48 @@ url_text = st.sidebar.text_area("URL")
 # checklist in sidebar with the options XGBoost, Logistic Regression and LSTM
 st.sidebar.subheader("Seleccione el modelo")
 model = st.sidebar.selectbox("Modelo", ("XGBoost", "Logistic Regression", "LSTM"))
+
+
+# PAG PRINCIPAL ---------------------------------------------------------------
+
+st.title("Proyecto de NLP para la Identificación de Noticias Falsas Acerca de COVID-19")
+st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Javeriana.svg/600px-Javeriana.svg.png", width=200)
+st.markdown("Esta aplicacion web permite detectar noticias falsas")
+
+st.subheader("Resumen noticia")
+
+# PAG 1 - ANALISIS DESCRIPTIVO DATASET
+# verdades vs falsas conteo
+# tokens de mayor frecuencia verdades y tokens mayor frecuencia falsas
+# Diversidad lexica
+# Nube palabras, mayor frecuencia y hapax
+# LDA
+
+# PAG 2 = ANALISIS MODELO PREDICTIVO
+# NOMBRE Y ESPECIFICACION DEL MODELO, HIPERPARAMETROS
+# CURVA ROC
+# METRICAS DE CALIDAD
+# INTERPRETABILIDAD
+
+
+# PAG 3 - CLASIFICADOR
+# Resumen noticia
+# topicos de la noticia
+# tabla informativa de la noticia
+# resultado modelo
+
+
+
+# try:
+#     response = get_completion(
+#         prompt=f""""
+#             Genera un resumen de 50 palabras de la siguiente noticia {text}
+#         """
+#     )
+# except:
+#     pass
+# st.markdown(response.to_dict()["choices"][0]["message"]["content"])
+
 
 # two columns for the plotly charts
 left_col_plot, right_col_plot = st.columns(2)
@@ -122,38 +161,40 @@ right_info_img.subheader("LDA")
 right_info_img.image("https://miro.medium.com/v2/resize:fit:1004/1*TRt0p1D-BFZ0WhoR5b_xqw.png", width=600)
 
 
+
+import streamlit.components.v1 as components
+
+st.header("test html import")
+
+HtmlFile = open("dashboard/testing.html", 'r', encoding='utf-8')
+source_code = HtmlFile.read() 
+components.html(source_code, height = 1000, width=1300)    
+
 left_info_col, right_info_col = st.columns(2)
 
 left_info_col.markdown(
     f"""
-    ### Authors
-    Please feel free to contact us with any issues, comments, or questions.
+    ### Integrantes Grupo
 
-    ##### Mitchell Parker [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/bukotsunikki.svg?style=social&label=Follow%20%40Mitch_P)](https://twitter.com/Mitch_P)
-
+    ##### Brayan David Rincón Piñeros 
     - Email:  <mip34@drexel.edu> or <mitchell.parker@fccc.edu>
-    - GitHub: https://github.com/mitch-parker
+    ##### Leonardo Restrepo Alvarez
+    - Email:  <mip34@drexel.edu> or <mitchell.parker@fccc.edu>
+    ##### Giovanni Jimenez Prieto
+    - Email:  <mip34@drexel.edu> or <mitchell.parker@fccc.edu>
+    ##### Miguel Arquez
+    - Email:  <mip34@drexel.edu> or <mitchell.parker@fccc.edu>
 
-    ##### Roland Dunbrack [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/bukotsunikki.svg?style=social&label=Follow%20%40RolandDunbrack)](https://twitter.com/RolandDunbrack)
-
-    - Email: <roland.dunbrack@fccc.edu>
-    - GitHub: https://github.com/DunbrackLab
+    
+    -  Repositorio Gitlab del proyecto: 
     """,
     unsafe_allow_html=True,
 )
 
 right_info_col.markdown(
         """
-        ### Funding
+        ### Pontificia Universidad Javeriana
 
-        - NIH NIGMS F30 GM142263 (to M.P.)
-        - NIH NIGMS R35 GM122517 (to R.D.)
+        - Maestría en Analítica para la inteligencia de negocios
          """
     )
-
-right_info_col.markdown(
-    """
-    ### License
-    Apache License 2.0
-    """
-)

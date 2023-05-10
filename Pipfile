@@ -15,6 +15,12 @@ gensim = "*"
 python-dotenv = "*"
 hyperopt = "*"
 xgboost = "*"
+streamlit = "*"
+plotly = "*"
+pyldavis = "*"
+nltk = "*"
+chardet = "*"
+unidecode = "*"
 
 [dev-packages]
 jupyterlab = "*"
