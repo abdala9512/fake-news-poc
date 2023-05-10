@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.figure_factory as ff
-import openai
+#import openai
 
-from dash_function import get_completion
+#from dash_function import get_completion
 
 # MULTIPAGE APP
 # https://docs.streamlit.io/library/get-started/multipage-apps/create-a-multipage-app
