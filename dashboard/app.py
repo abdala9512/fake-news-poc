@@ -123,48 +123,6 @@ right_col_plot.plotly_chart({
     }
 })
 
-
-
-# Model interpretation section
-st.subheader("Analisis Modelos Predictivos")
-
-st.markdown("""
-En esta seccion se presenta el analisis del modelo predictivo.
-Los modelos entrenados son:
-- **XGBoost**: El modelo XGBoost es un modelo de arboles de decision.
-- **Logistic Regression**: El modelo Logistic Regression es un modelo de regresion logistica.
-- **LSTM**: El modelo LSTM es un modelo de redes neuronales recurrentes.
-
-Los componentes del analisis son:
-- **Curva ROC**: La curva ROC permite entender la calidad del modelo predictivo.
-- **Metricas de calidad**: Las metricas de calidad permiten entender la calidad del modelo predictivo.
-- **Interpretacion del modelo**: La interpretacion del modelo permite entender como se toman las decisiones del modelo predictivo.
-""")
-
-st.markdown("El modelo predice que la noticia es falsa con una probabilidad de 0.8")
-st.image("https://shap.readthedocs.io/en/latest/_images/example_notebooks_overviews_An_introduction_to_explainable_AI_with_Shapley_values_37_0.png", width=600)
-
-# Table with random news articles about COVID-19 and their probability of being fake
-df = pd.DataFrame({
-    'Noticia': ['Noticia 1', 'Noticia 2', 'Noticia 3', 'Noticia 4', 'Noticia 5'],
-    'Probabilidad': [0.1, 0.2, 0.3, 0.4, 0.5],
-    'Veracidad': ['Fake', 'Real', 'Fake', 'Real', 'Fake']
-})
-st.subheader("Noticias relacionadas")
-st.table(df)
-
-st.subheader("Clasificador")
-
-st.markdown("""
-En esta seccion se presenta el clasificador de noticias falsas y verdaderas.
-
-- **Resumen de la noticia**: El resumen de la noticia permite entender el contenido de la noticia.
-- **Topicos de la noticia**: Los topicos de la noticia permiten entender los topicos de la noticia.
-- **Tabla informativa**: La tabla informativa permite entender la veracidad de la noticia.
-- **prediction**: La prediccion permite entender la veracidad de la noticia.
-""")
-
-
 # Distribution histogram with random data of length of news articles in words categorized by fake or real
 st.subheader("Distribucion de palabras en noticias")
 
@@ -196,12 +154,6 @@ left_info_img.subheader("Nube de palabras")
 left_info_img.image("https://editor.analyticsvidhya.com/uploads/53286wordcloud.PNG", width=600)
 
 
-right_info_img.subheader("LDA")
-right_info_img.image("https://miro.medium.com/v2/resize:fit:1004/1*TRt0p1D-BFZ0WhoR5b_xqw.png", width=600)
-
-
-
-
 st.header("LDA - Latent Dirichlet Allocation - Creacion de topicos")
 st.markdown("""
 
@@ -213,11 +165,63 @@ objetivo de identificar los topicos de las noticias. Se usa la libreria [**pyLDA
 """)
 
 
-
-
 HtmlFile = open("dashboard/testing.html", 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
 components.html(source_code, height = 1000, width=1300)    
+
+st.header("Word Embedding - Representacion de palabras en vectores")
+st.markdown("""
+[embedding]: ## "Word Embedding es una tecnica de procesamiento de lenguaje natural que permite representar palabras como vectores de numeros reales. Esta tecnica permite representar palabras en un espacio vectorial donde palabras similares estan cerca entre si. Esta tecnica permite representar palabras en un espacio vectorial donde palabras similares estan cerca entre si."
+
+En esta seccion se presenta la representacion de palabras en vectores con [word embeddings][embedding].
+""")
+
+# Model interpretation section
+st.subheader("Analisis Modelos Predictivos")
+
+st.markdown("""
+
+[roc]: ## "La curva ROC y el AUC son medidas que se utilizan para evaluar la capacidad predictiva de un modelo en problemas binarios. La curva ROC muestra la relación entre la tasa de verdaderos positivos y la tasa de falsos positivos, mientras que el AUC es una medida del rendimiento general del modelo. En resumen, son herramientas para evaluar qué tan bien un modelo puede distinguir entre dos clases."
+En esta seccion se presenta el analisis del modelo predictivo.
+Los modelos entrenados son:
+- **XGBoost**: El modelo XGBoost es un modelo de arboles de decision.
+- **Logistic Regression**: El modelo Logistic Regression es un modelo de regresion logistica.
+- **LSTM**: El modelo LSTM es un modelo de redes neuronales recurrentes.
+
+Los componentes del analisis son:
+- **[Curva ROC][roc]**: La curva ROC permite entender la calidad del modelo predictivo.
+- **Metricas de calidad**: Las metricas de calidad permiten entender la calidad del modelo predictivo.
+- **Interpretacion del modelo**: La interpretacion del modelo permite entender como se toman las decisiones del modelo predictivo.
+""")
+
+st.markdown("El modelo predice que la noticia es falsa con una probabilidad de 0.8")
+st.image("https://shap.readthedocs.io/en/latest/_images/example_notebooks_overviews_An_introduction_to_explainable_AI_with_Shapley_values_37_0.png", width=600)
+
+# Table with random news articles about COVID-19 and their probability of being fake
+df = pd.DataFrame({
+    'Noticia': ['Noticia 1', 'Noticia 2', 'Noticia 3', 'Noticia 4', 'Noticia 5'],
+    'Probabilidad': [0.1, 0.2, 0.3, 0.4, 0.5],
+    'Veracidad': ['Fake', 'Real', 'Fake', 'Real', 'Fake']
+})
+st.subheader("Noticias relacionadas")
+st.table(df)
+
+st.subheader("Clasificador")
+
+st.markdown("""
+En esta seccion se presenta el clasificador de noticias falsas y verdaderas.
+
+- **Resumen de la noticia**: El resumen de la noticia permite entender el contenido de la noticia.
+- **Topicos de la noticia**: Los topicos de la noticia permiten entender los topicos de la noticia.
+- **Tabla informativa**: La tabla informativa permite entender la veracidad de la noticia.
+- **prediction**: La prediccion permite entender la veracidad de la noticia.
+""")
+
+
+right_info_img.subheader("LDA")
+right_info_img.image("https://miro.medium.com/v2/resize:fit:1004/1*TRt0p1D-BFZ0WhoR5b_xqw.png", width=600)
+
+
 
 left_info_col, right_info_col = st.columns(2)
 
