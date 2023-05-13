@@ -18,7 +18,7 @@ stop_words = set(stopwords.words(["spanish", "english"]))
 # Datos y modelos
 
 COLUMNS_TO_DROP = ["Texto", "Hapaxes", "PalabrasLargas"]
-data = pd.read_csv("data/data_fake_news/processed/processed_data_news.csv", sep="\t")
+data = pd.read_csv("dashboard/dash_data/processed_data_news.csv", sep="\t")
 # Embeddings
 with open("embeddings_news.pickle", "rb") as handle:
     embeddings_vector = pickle.load(handle)
