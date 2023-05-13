@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.figure_factory as ff
+import streamlit.components.v1 as components
+
 #import openai
 
 #from dash_function import get_completion
@@ -30,9 +32,29 @@ model = st.sidebar.selectbox("Modelo", ("XGBoost", "Logistic Regression", "LSTM"
 
 st.title("Proyecto de NLP para la Identificación de Noticias Falsas Acerca de COVID-19")
 st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Javeriana.svg/600px-Javeriana.svg.png", width=200)
-st.markdown("Esta aplicacion web permite detectar noticias falsas")
+st.markdown("""
+Esta aplicacion web permite detectar noticias falsas y tiene uso como herramienta
+Pedagogica para la identificacion de noticias falsas e interpretacion de resultados.
 
-st.subheader("Resumen noticia")
+Los componente de la aplicacion son:
+- **Analisis descriptivo**: El analisis descriptivo permite entender la distribucion de las noticias y los topicos de las noticias.
+- **ingenieria de caracteristicas**: La ingenieria de caracteristicas permite entender como se transforman las noticias en vectores.
+- **Modelo predictivo**: El modelo predictivo permite predecir si una noticia es falsa o verdadera.
+- **Interpretacion del modelo**: El modelo predictivo es interpretable y permite entender como se toman las decisiones.
+- **Clasificador**: El clasificador permite ingresar una noticia y obtener un resumen de la noticia, los topicos de la noticia y la veracidad de la noticia.
+
+""")
+
+st.subheader("Analisis Descriptivo")
+st.markdown("""
+En esta seccion se presenta el analisis descriptivo de las noticias. 
+El dataset esta compuesto por 1000 noticias falsas y 1000 noticias verdaderas extraidas de medios de comunicacion en internet.
+
+- **Distribucion de noticias**: La distribucion de noticias permite entender la distribucion de noticias falsas y verdaderas.
+- **Distribucion de palabras**: La distribucion de palabras permite entender la distribucion de palabras en las noticias falsas y verdaderas.
+- **Distribucion de topicos**: La distribucion de topicos permite entender la distribucion de topicos en las noticias falsas y verdaderas.
+""")
+
 
 # PAG 1 - ANALISIS DESCRIPTIVO DATASET
 # verdades vs falsas conteo
@@ -104,7 +126,21 @@ right_col_plot.plotly_chart({
 
 
 # Model interpretation section
-st.subheader("Interpretacion del modelo")
+st.subheader("Analisis Modelos Predictivos")
+
+st.markdown("""
+En esta seccion se presenta el analisis del modelo predictivo.
+Los modelos entrenados son:
+- **XGBoost**: El modelo XGBoost es un modelo de arboles de decision.
+- **Logistic Regression**: El modelo Logistic Regression es un modelo de regresion logistica.
+- **LSTM**: El modelo LSTM es un modelo de redes neuronales recurrentes.
+
+Los componentes del analisis son:
+- **Curva ROC**: La curva ROC permite entender la calidad del modelo predictivo.
+- **Metricas de calidad**: Las metricas de calidad permiten entender la calidad del modelo predictivo.
+- **Interpretacion del modelo**: La interpretacion del modelo permite entender como se toman las decisiones del modelo predictivo.
+""")
+
 st.markdown("El modelo predice que la noticia es falsa con una probabilidad de 0.8")
 st.image("https://shap.readthedocs.io/en/latest/_images/example_notebooks_overviews_An_introduction_to_explainable_AI_with_Shapley_values_37_0.png", width=600)
 
@@ -117,12 +153,15 @@ df = pd.DataFrame({
 st.subheader("Noticias relacionadas")
 st.table(df)
 
-# hover over a word with additional information about the word
-st.subheader("Informacion adicional")
-st.markdown("""
-[id1]: ## "**Aqui** va el significado de una palabra rara Aqui va el significado de una palabra rara Aqui va el significado de una palabra rara Aqui va el significado de una palabra rara"
+st.subheader("Clasificador")
 
-This is a [**Palabra rara**][id1] example.
+st.markdown("""
+En esta seccion se presenta el clasificador de noticias falsas y verdaderas.
+
+- **Resumen de la noticia**: El resumen de la noticia permite entender el contenido de la noticia.
+- **Topicos de la noticia**: Los topicos de la noticia permiten entender los topicos de la noticia.
+- **Tabla informativa**: La tabla informativa permite entender la veracidad de la noticia.
+- **prediction**: La prediccion permite entender la veracidad de la noticia.
 """)
 
 
@@ -162,9 +201,19 @@ right_info_img.image("https://miro.medium.com/v2/resize:fit:1004/1*TRt0p1D-BFZ0W
 
 
 
-import streamlit.components.v1 as components
 
-st.header("test html import")
+st.header("LDA - Latent Dirichlet Allocation - Creacion de topicos")
+st.markdown("""
+
+[lda]: ## "LDA es un modelo estadístico que se utiliza para identificar temas en grandes conjuntos de datos, como textos. Es una herramienta útil para entender las principales ideas y patrones en un conjunto de documentos, permitiendo que los usuarios clasifiquen y analicen la información de manera más eficiente."
+
+En esta seccion se presenta la creacion de topicos.
+Para la identificacion de topicos se utilizo el algoritmo [**LDA - Latent Dirichlet Allocation**][lda] con el
+objetivo de identificar los topicos de las noticias. Se usa la libreria [**pyLDAvis**](https://github.com/bmabey/pyLDAvis/) para la visualizacion interactiva.
+""")
+
+
+
 
 HtmlFile = open("dashboard/testing.html", 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
