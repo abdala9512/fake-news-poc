@@ -21,6 +21,8 @@ pyldavis = "*"
 nltk = "*"
 chardet = "*"
 unidecode = "*"
+openai = "*"
+wordcloud = "*"
 
 [dev-packages]
 jupyterlab = "*"
