@@ -12,20 +12,17 @@ stanza = "*"
 matplotlib = "*"
 mlflow = "*"
 gensim = "*"
-python-dotenv = "*"
 hyperopt = "*"
-xgboost = "*"
 streamlit = "*"
 plotly = "*"
 pyldavis = "*"
 nltk = "*"
-chardet = "*"
-unidecode = "*"
 openai = "*"
 wordcloud = "*"
+altair = "< 5.0.0"
 
 [dev-packages]
 jupyterlab = "*"
 
 [requires]
-python_version = "3.10"
+python_version = "3.10.0"

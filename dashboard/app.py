@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import plotly.figure_factory as ff
 import streamlit.components.v1 as components
 import plotly.express as px
@@ -82,26 +81,6 @@ El dataset esta compuesto por 1000 noticias falsas y 1000 noticias verdaderas ex
 
 
 st.table(data.drop(COLUMNS_TO_DROP, axis=1).head(1))
-
-# PAG 1 - ANALISIS DESCRIPTIVO DATASET
-# verdades vs falsas conteo
-# tokens de mayor frecuencia verdades y tokens mayor frecuencia falsas
-# Diversidad lexica
-# Nube palabras, mayor frecuencia y hapax
-# LDA
-
-# PAG 2 = ANALISIS MODELO PREDICTIVO
-# NOMBRE Y ESPECIFICACION DEL MODELO, HIPERPARAMETROS
-# CURVA ROC
-# METRICAS DE CALIDAD
-# INTERPRETABILIDAD
-
-
-# PAG 3 - CLASIFICADOR
-# Resumen noticia
-# topicos de la noticia
-# tabla informativa de la noticia
-# resultado modelo
 
 
 # try:
