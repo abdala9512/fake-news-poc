@@ -5,8 +5,11 @@ import streamlit.components.v1 as components
 import plotly.express as px
 from wordcloud import WordCloud
 from nltk.corpus import stopwords
+import nltk
 import pickle
 #from dash_functions import generate_embeddings_2d
+
+nltk.download('stopwords')
 
 # Configs
 st.set_page_config(layout="wide")
