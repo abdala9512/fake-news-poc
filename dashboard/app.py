@@ -50,15 +50,15 @@ st.image(
 )
 st.markdown(
     """
-Esta aplicacion web permite detectar noticias falsas y tiene uso como herramienta
-Pedagogica para la identificacion de noticias falsas e interpretacion de resultados.
+EEsta aplicación web permite detectar noticias falsas y tiene uso como herramienta pedagógica para la identificación de noticias falsas e interpretación de resultados.
 
-Los componente de la aplicacion son:
-- **Analisis descriptivo**: El analisis descriptivo permite entender la distribucion de las noticias y los topicos de las noticias.
-- **ingenieria de caracteristicas**: La ingenieria de caracteristicas permite entender como se transforman las noticias en vectores.
-- **Modelo predictivo**: El modelo predictivo permite predecir si una noticia es falsa o verdadera.
-- **Interpretacion del modelo**: El modelo predictivo es interpretable y permite entender como se toman las decisiones.
-- **Clasificador**: El clasificador permite ingresar una noticia y obtener un resumen de la noticia, los topicos de la noticia y la veracidad de la noticia.
+Los componentes de la aplicación son:
+
+Análisis descriptivo: El análisis descriptivo permite entender la distribución de las noticias y los tópicos de las noticias.
+Ingeniería de características: La ingeniería de características permite entender cómo se transforman las noticias en vectores.
+Modelo predictivo: El modelo predictivo permite predecir si una noticia es falsa o verdadera.
+Interpretación del modelo: El modelo predictivo es interpretable y permite entender cómo se toman las decisiones.
+Clasificador: El clasificador permite ingresar una noticia y obtener un resumen de la noticia, los tópicos de la noticia y la veracidad de la noticia.
 
 """
 )
@@ -287,7 +287,7 @@ En esta seccion se presenta el clasificador de noticias falsas y verdaderas.
 """
 )
 
-news_input_text = st.text_area("Noticia")
+news_input_text = st.text_area("Noticia",height=200)
 from dash_functions import predict_news
 
 try:
