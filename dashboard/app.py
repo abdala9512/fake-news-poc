@@ -37,7 +37,7 @@ data = pd.read_csv("dashboard/dash_data/processed_data_news.csv", sep="\t")
 # SIDE BAR ---------------------------------------------------------
 
 
-st.sidebar.title("Analisis de Texto y deteccion de noticias falsas sobre COVID-19")
+st.sidebar.title("Análisis de Texto y Detección de Noticias Falsas sobre COVID-19")
 
 
 
@@ -50,28 +50,30 @@ st.image(
 )
 st.markdown(
     """
-EEsta aplicación web permite detectar noticias falsas y tiene uso como herramienta pedagógica para la identificación de noticias falsas e interpretación de resultados.
+Esta aplicación web permite detectar noticias falsas y tiene uso como herramienta pedagógica para la identificación de noticias falsas e interpretación de resultados.
 
 Los componentes de la aplicación son:
 
-Análisis descriptivo: El análisis descriptivo permite entender la distribución de las noticias y los tópicos de las noticias.
-Ingeniería de características: La ingeniería de características permite entender cómo se transforman las noticias en vectores.
-Modelo predictivo: El modelo predictivo permite predecir si una noticia es falsa o verdadera.
-Interpretación del modelo: El modelo predictivo es interpretable y permite entender cómo se toman las decisiones.
-Clasificador: El clasificador permite ingresar una noticia y obtener un resumen de la noticia, los tópicos de la noticia y la veracidad de la noticia.
+- **Análisis descriptivo**: El análisis descriptivo permite entender la distribución de las noticias y los tópicos de las noticias.
+- **Ingeniería de características**: La ingeniería de características permite entender cómo se transforman las noticias en vectores.
+- **Modelo predictivo**: El modelo predictivo permite predecir si una noticia es falsa o verdadera.
+- **Interpretación del modelo**: El modelo predictivo es interpretable y permite entender cómo se toman las decisiones.
+- **Clasificador**: El clasificador permite ingresar una noticia y obtener un resumen de la noticia, los tópicos de la noticia y la veracidad de la noticia.
 
 """
 )
 
-st.subheader("Analisis Descriptivo")
+st.subheader("Análisis Descriptivo")
 st.markdown(
     """
-En esta seccion se presenta el analisis descriptivo de las noticias. 
-El dataset esta compuesto por 1000 noticias falsas y 1000 noticias verdaderas extraidas de medios de comunicacion en internet.
+En esta sección se presenta el análisis descriptivo de las noticias. El dataset está compuesto por 1000 noticias falsas y 1000 noticias verdaderas extraídas de medios de comunicación en internet.
 
-- **Distribucion de noticias**: La distribucion de noticias permite entender la distribucion de noticias falsas y verdaderas.
-- **Distribucion de palabras**: La distribucion de palabras permite entender la distribucion de palabras en las noticias falsas y verdaderas.
-- **Distribucion de topicos**: La distribucion de topicos permite entender la distribucion de topicos en las noticias falsas y verdaderas.
+Los componentes del análisis descriptivo son:
+
+- **Distribución de noticias**: La distribución de noticias permite entender la distribución de noticias falsas y verdaderas.
+- **Distribución de palabras**: La distribución de palabras permite entender la distribución de palabras en las noticias falsas y verdaderas.
+- **Distribución de tópicos**: La distribución de tópicos permite entender la distribución de tópicos en las noticias falsas y verdaderas.
+
 """
 )
 
@@ -196,18 +198,20 @@ right_info_img.subheader("Noticias Falsas")
 right_info_img.image(word_cloud_fake.to_array())
 
 
-st.header("LDA - Latent Dirichlet Allocation - Creacion de topicos")
+st.header("LDA - Latent Dirichlet Allocation - Creación de topicos")
 st.markdown(
     """
 
 [lda]: ## "LDA es un modelo estadístico que se utiliza para identificar temas en grandes conjuntos de datos, como textos. Es una herramienta útil para entender las principales ideas y patrones en un conjunto de documentos, permitiendo que los usuarios clasifiquen y analicen la información de manera más eficiente."
+En esta sección se presenta la creación de tópicos.
 
-En esta seccion se presenta la creacion de topicos.
-Para la identificacion de topicos se utilizo el algoritmo [**LDA - Latent Dirichlet Allocation**][lda] con el
-objetivo de identificar los topicos de las noticias. Se usa la libreria [**pyLDAvis**](https://github.com/bmabey/pyLDAvis/) para la visualizacion interactiva.
+Para la identificación de tópicos se utilizó el algoritmo [**LDA - Latent Dirichlet Allocation**][lda], que es un modelo estadístico utilizado para identificar temas en grandes conjuntos de datos, como textos. Es una herramienta útil para entender las principales ideas y patrones en un conjunto de documentos, permitiendo que los usuarios clasifiquen y analicen la información de manera más eficiente.
+
+Se usa la librería [**pyLDAvis**](https://github.com/bmabey/pyLDAvis/) para la visualización interactiva de los resultados.
+
 """
 )
-lda_select = st.selectbox("Seleccione el numero de topicos", ("LDA Falsas", "LDA Verdaderas"))
+lda_select = st.selectbox("Seleccione el número de topicos", ("LDA Falsas", "LDA Verdaderas"))
 
 lda_dict = {
     "LDA Falsas": "dashboard/LDA_fake.html",
@@ -236,7 +240,7 @@ components.html(source_code, height=1000, width=1300)
 #     embeddings_chart, use_container_width=True, layout=dict(title="Word Embeddings")
 # )
 # Model interpretation section
-st.subheader("Analisis Modelos Predictivos")
+st.subheader("Análisis Modelos Predictivos")
 
 st.markdown(
     """
@@ -247,9 +251,9 @@ Los modelos entrenados son:
 - **Logistic Regression**: El modelo Logistic Regression es un modelo de regresion logistica.
 - **LSTM**: El modelo LSTM es un modelo de redes neuronales recurrentes.
 
-Los componentes del analisis son:
+Los componentes del anélisis son:
 - **[Curva ROC][roc]**: La curva ROC permite entender la calidad del modelo predictivo.
-- **Metricas de calidad**: Las metricas de calidad permiten entender la calidad del modelo predictivo.
+- **Métricas de calidad**: Las metricas de calidad permiten entender la calidad del modelo predictivo.
 - **Interpretacion del modelo**: La interpretacion del modelo permite entender como se toman las decisiones del modelo predictivo.
 """
 )
@@ -281,9 +285,9 @@ st.subheader("Clasificador de noticias - Red neuronal")
 #<!--- **Tabla informativa**: La tabla informativa permite entender la veracidad de la noticia. -->
 st.markdown(
     """
-En esta seccion se presenta el clasificador de noticias falsas y verdaderas.
+En esta sección se presenta el clasificador de noticias falsas y verdaderas.
 
-- **prediccion**: La prediccion permite entender la veracidad de la noticia.
+- **predicción**: La prediccion permite entender la veracidad de la noticia.
 """
 )
 
