@@ -10,6 +10,7 @@ import pickle
 #from dash_functions import generate_embeddings_2d
 
 nltk.download('stopwords')
+nltk.download('punkt')
 
 # Configs
 st.set_page_config(layout="wide")
