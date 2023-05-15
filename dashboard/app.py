@@ -4,7 +4,6 @@ import plotly.figure_factory as ff
 import streamlit.components.v1 as components
 import plotly.express as px
 from wordcloud import WordCloud
-import matplotlib.pyplot as plt
 from nltk.corpus import stopwords
 import pickle
 from dash_functions import generate_embeddings_2d
@@ -193,14 +192,10 @@ word_cloud_true = WordCloud(
 ).generate(true_news)
 
 left_info_img.subheader("Noticias Verdaderas")
-plt.imshow(word_cloud_true, interpolation="bilinear")
-plt.axis("off")
 left_info_img.image(word_cloud_true.to_array())
 
 
 right_info_img.subheader("Noticias Falsas")
-plt.imshow(word_cloud_true, interpolation="bilinear")
-plt.axis("off")
 right_info_img.image(word_cloud_fake.to_array())
 
 
