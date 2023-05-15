@@ -3,10 +3,19 @@ import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from umap import UMAP
-from typing import Any
-import matplotlib.pyplot as plt
+from typing import Any, Dict, List
 import pandas as pd
+import pickle
 
+from sklearn.preprocessing import LabelBinarizer
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import SnowballStemmer
+import string
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+import tensorflow as tf
+from ast import literal_eval
 
 def get_completion(prompt: str, model="gpt-3.5-turbo"):
     messages = [{"role": "user", "content": prompt}]
@@ -15,43 +24,32 @@ def get_completion(prompt: str, model="gpt-3.5-turbo"):
     )
     return response
 
+def process_text(text, keep_as_list=False, additional_stopwords: List = []):
+    """
+    Input:
+        text: a string containing a text
+    Output:
+        text_clean: a list of words containing the processed text
 
-plt.rcParams["figure.figsize"] = (20, 10)
+    """
 
+    stemmer = SnowballStemmer("spanish")
+    stopwords_ = stopwords.words("spanish")
+    text_tokens = word_tokenize(text)
 
-def visualize_embedding(
-    key_to_vector_embedding: dict, algorithm: Any = TSNE(), word_limit: int = 20
-) -> None:
-    """Crea una visualizacion de embeddings"""
-    assert (
-        isinstance(algorithm, PCA)
-        or isinstance(algorithm, TSNE)
-        or isinstance(algorithm, UMAP)
-    ), "La visualizacion solo funciona con instancias PCA, TSNE o UMAP"
-
-    vectors = []
-    labels = []
-    for key, vector in key_to_vector_embedding.items():
-        vectors.append(vector)
-        labels.append(key)
-
-    reduced_2d_data = algorithm.fit_transform(np.array(vectors))
-    x, y = reduced_2d_data[:, 0], reduced_2d_data[:, 1]
-
-    for i in range(word_limit):
-        plt.scatter(x[i], y[i], color="#59C1BD")
-        plt.annotate(
-            labels[i],
-            xy=(x[i], y[i]),
-            xytext=(5, 2),
-            textcoords="offset points",
-            ha="right",
-            va="bottom",
-        )
-    plt.xlabel("Dim 1", size=15)
-    plt.ylabel("Dim 2", size=15)
-    plt.title("Representacion Embeddings", size=30)
-    plt.show()
+    text_clean = []
+    for word in text_tokens:
+        if (
+            word not in stopwords_
+            and word not in string.punctuation  # remove stopwords
+            and word.isalpha()
+            and word not in additional_stopwords
+        ):  # remove punctuation
+            # stemmed_word = stemmer.stem(word)
+            text_clean.append(word)
+    if keep_as_list:
+        return text_clean
+    return " ".join(text_clean)
 
 
 def generate_embeddings_2d(
@@ -74,3 +72,35 @@ def generate_embeddings_2d(
     x, y = reduced_2d_data[:, 0], reduced_2d_data[:, 1]
 
     return pd.DataFrame({"word": labels, "x": x, "y": y}).head(word_limit)
+
+
+data = pd.read_csv("dashboard/dash_data/processed_data_news.csv", sep="\t")
+
+data["text_tokenized"] = data["Texto"].apply(lambda x: process_text(x, keep_as_list=False))
+label_binarizer = LabelBinarizer()
+
+tf_tokenizer = Tokenizer()
+fit_text = [" ".join(data["text_tokenized"])]
+tf_tokenizer.fit_on_texts(fit_text)
+
+MAX_LEN = 100
+
+def text_to_index(text):
+    """Convierte un texto a una secuencia de indices"""
+    return [ tf_tokenizer.word_index[word] for word in text.split(" ")]
+
+
+def predict_news(text: str, probs_dict: Dict = {}) -> str:
+    
+    nn_model = tf.keras.models.load_model("dashboard/dash_data/neural_network/")
+
+    tokenized = " ".join([
+        word for word in process_text(text.lower()).split(" ")
+        if word in list(tf_tokenizer.word_index.keys())
+       ])
+
+    vector_ = tf.keras.preprocessing.sequence.pad_sequences( 
+          np.array(text_to_index(tokenized)).reshape(1,-1),  maxlen=MAX_LEN
+       )
+
+    return nn_model.predict(vector_)

@@ -35,16 +35,9 @@ data = pd.read_csv("dashboard/dash_data/processed_data_news.csv", sep="\t")
 
 # SIDE BAR ---------------------------------------------------------
 
-st.sidebar.markdown("Esta aplicacion web permite detectar noticias falsas")
-st.sidebar.subheader("Ingrese el texto de la noticia")
-st.sidebar.title("Fake News Detection")
-text = st.sidebar.text_area("Noticia")
-st.sidebar.subheader("Ingrese URL de la noticia")
-url_text = st.sidebar.text_area("URL")
 
-# checklist in sidebar with the options XGBoost, Logistic Regression and LSTM
-st.sidebar.subheader("Seleccione el modelo")
-model = st.sidebar.selectbox("Modelo", ("XGBoost", "Logistic Regression", "LSTM"))
+st.sidebar.title("Analisis de Texto y deteccion de noticias falsas sobre COVID-19")
+
 
 
 # PAG PRINCIPAL ---------------------------------------------------------------
@@ -82,7 +75,7 @@ El dataset esta compuesto por 1000 noticias falsas y 1000 noticias verdaderas ex
 )
 
 
-st.table(data.drop(COLUMNS_TO_DROP, axis=1).head(1))
+#st.table(data.drop(COLUMNS_TO_DROP, axis=1).head(1))
 
 
 # try:
@@ -224,14 +217,14 @@ HtmlFile = open(lda_dict[lda_select], "r", encoding="utf-8")
 source_code = HtmlFile.read()
 components.html(source_code, height=1000, width=1300)
 
-st.header("Word Embedding - Representacion de palabras en vectores")
-st.markdown(
-    """
-[embedding]: ## "Word Embedding es una tecnica de procesamiento de lenguaje natural que permite representar palabras como vectores de numeros reales. Esta tecnica permite representar palabras en un espacio vectorial donde palabras similares estan cerca entre si. Esta tecnica permite representar palabras en un espacio vectorial donde palabras similares estan cerca entre si."
+#st.header("Word Embedding - Representacion de palabras en vectores")
+#st.markdown(
+#    """
+#[embedding]: ## "Word Embedding es una tecnica de procesamiento de lenguaje natural que permite representar palabras como vectores de numeros reales. Esta tecnica permite representar palabras en un espacio vectorial donde palabras similares estan cerca entre si. Esta tecnica permite representar palabras en un espacio vectorial donde palabras similares estan cerca entre si."
 
-En esta seccion se presenta la representacion de palabras en vectores con [word embeddings][embedding].
-"""
-)
+#En esta seccion se presenta la representacion de palabras en vectores con [word embeddings][embedding].
+#"""
+#   )
 
 # embeddings_data = generate_embeddings_2d(
 #     key_to_vector_embedding=embeddings_vector, word_limit=100
@@ -250,7 +243,6 @@ st.markdown(
 [roc]: ## "La curva ROC y el AUC son medidas que se utilizan para evaluar la capacidad predictiva de un modelo en problemas binarios. La curva ROC muestra la relación entre la tasa de verdaderos positivos y la tasa de falsos positivos, mientras que el AUC es una medida del rendimiento general del modelo. En resumen, son herramientas para evaluar qué tan bien un modelo puede distinguir entre dos clases."
 En esta seccion se presenta el analisis del modelo predictivo.
 Los modelos entrenados son:
-- **XGBoost**: El modelo XGBoost es un modelo de arboles de decision.
 - **Logistic Regression**: El modelo Logistic Regression es un modelo de regresion logistica.
 - **LSTM**: El modelo LSTM es un modelo de redes neuronales recurrentes.
 
@@ -260,63 +252,82 @@ Los componentes del analisis son:
 - **Interpretacion del modelo**: La interpretacion del modelo permite entender como se toman las decisiones del modelo predictivo.
 """
 )
+left_metric_img, right_metric_img = st.columns(2)
 
-st.markdown("El modelo predice que la noticia es falsa con una probabilidad de 0.8")
-st.image(
-    "https://shap.readthedocs.io/en/latest/_images/example_notebooks_overviews_An_introduction_to_explainable_AI_with_Shapley_values_37_0.png",
-    width=600,
-)
+left_metric_img.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Roc_curve.svg/220px-Roc_curve.svg.png", width=600)
+right_metric_img.image("https://miro.medium.com/v2/resize:fit:1400/1*fxiTNIgOyvAombPJx5KGeA.png", width=600)
+#st.markdown("El modelo predice que la noticia es falsa con una probabilidad de 0.8")
+#st.image(
+#    "https://shap.readthedocs.io/en/latest/_images/example_notebooks_overviews_An_introduction_to_explainable_AI_with_Shapley_values_37_0.png",
+#    width=600,
+#)
 
 # Table with random news articles about COVID-19 and their probability of being fake
-df = pd.DataFrame(
-    {
-        "Noticia": ["Noticia 1", "Noticia 2", "Noticia 3", "Noticia 4", "Noticia 5"],
-        "Probabilidad": [0.1, 0.2, 0.3, 0.4, 0.5],
-        "Veracidad": ["Fake", "Real", "Fake", "Real", "Fake"],
-    }
-)
-st.subheader("Noticias relacionadas")
-st.table(df)
+#df = pd.DataFrame(
+#    {
+#        "Noticia": ["Noticia 1", "Noticia 2", "Noticia 3", "Noticia 4", "Noticia 5"],
+#        "Probabilidad": [0.1, 0.2, 0.3, 0.4, 0.5],
+#        "Veracidad": ["Fake", "Real", "Fake", "Real", "Fake"],
+#    }
+#)
+#st.subheader("Noticias relacionadas")
+#st.table(df)
 
-st.subheader("Clasificador")
+st.subheader("Clasificador de noticias - Red neuronal")
 
+#<!--- **Resumen de la noticia**: El resumen de la noticia permite entender el contenido de la noticia. -->
+#<!--- **Topicos de la noticia**: Los topicos de la noticia permiten entender los topicos de la noticia. -->
+#<!--- **Tabla informativa**: La tabla informativa permite entender la veracidad de la noticia. -->
 st.markdown(
     """
 En esta seccion se presenta el clasificador de noticias falsas y verdaderas.
 
-- **Resumen de la noticia**: El resumen de la noticia permite entender el contenido de la noticia.
-- **Topicos de la noticia**: Los topicos de la noticia permiten entender los topicos de la noticia.
-- **Tabla informativa**: La tabla informativa permite entender la veracidad de la noticia.
-- **prediction**: La prediccion permite entender la veracidad de la noticia.
+- **prediccion**: La prediccion permite entender la veracidad de la noticia.
 """
 )
 
+news_input_text = st.text_area("Noticia")
+from dash_functions import predict_news
+
+try:
+    st.markdown(f"""
+    #### La noticia tiene una probabilidad de ser falsa del : {round((1- predict_news(news_input_text)[0][0]) * 100,2)}%
+    """)
+except:
+    st.markdown(f"""
+    #### Esperando noticia...
+    """)
 
 left_info_col, right_info_col = st.columns(2)
 
 left_info_col.markdown(
     f"""
+
+
+    <br />
+    <br />
+    <br />
+
     ### Integrantes Grupo
 
-    ##### Brayan David Rincón Piñeros 
-    - Email:  <bdavid_rincon@javeriana.edu.co> 
-    ##### Leonardo Restrepo Alvarez
-    - Email:  <le.restrepo@javeriana.edu.co> 
-    ##### Giovanni Jimenez Prieto
-    - Email:  <jimenezgiovanni@javeriana.edu.co> 
-    ##### Miguel Arquez
-    - Email:  <arquez.m@javeriana.edu.co> 
+    ##### Brayan David Rincón Piñeros, <bdavid_rincon@javeriana.edu.co> 
+    ##### Leonardo Restrepo Alvarez,  <le.restrepo@javeriana.edu.co> 
+    ##### Giovanni Jimenez Prieto, <jimenezgiovanni@javeriana.edu.co> 
+    ##### Miguel Arquez, <arquez.m@javeriana.edu.co> 
 
-    
-    -  Repositorio Gitlab del proyecto: 
-    """,
+        """,
     unsafe_allow_html=True,
 )
 
 right_info_col.markdown(
     """
-        ### Pontificia Universidad Javeriana
 
-        - Maestría en Analítica para la inteligencia de negocios, 2023
-         """
+    <br />
+    <br />
+    <br />
+    
+    ### Pontificia Universidad Javeriana
+    - Maestría en Analítica para la inteligencia de negocios, 2023
+    """,
+    unsafe_allow_html=True,
 )

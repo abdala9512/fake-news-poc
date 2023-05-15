@@ -22,6 +22,7 @@ altair = "< 5.0.0"
 statsmodels = "*"
 tensorflow = "*"
 importlib-resources = "*"
+keras = "*"
 
 [dev-packages]
 jupyterlab = "*"
