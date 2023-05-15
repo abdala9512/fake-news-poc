@@ -21,6 +21,7 @@ wordcloud = "1.8.2.2"
 altair = "< 5.0.0"
 statsmodels = "*"
 tensorflow = "*"
+importlib-resources = "*"
 
 [dev-packages]
 jupyterlab = "*"
