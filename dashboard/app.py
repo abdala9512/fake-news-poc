@@ -6,7 +6,7 @@ import plotly.express as px
 from wordcloud import WordCloud
 from nltk.corpus import stopwords
 import pickle
-from dash_functions import generate_embeddings_2d
+#from dash_functions import generate_embeddings_2d
 
 # Configs
 st.set_page_config(layout="wide")
