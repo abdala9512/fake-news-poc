@@ -51,17 +51,89 @@ Construir un modelo de clasificación de noticias asociadas a COVID-19 con metri
 - Implementar diversas tecnicas de procesamiento de lenguaje natural y machine learning en la construcción del modelo de clasificación.
 - Superar en 10 puntos porcentuales un clasificador ingenuo.
 
-# Arquirectura de la solución
+# Arquitectura de la solución
 
-# Esctructura del proyecto
+<img src="docs/img/pipeline_javeriana.png" width = "600" class="center" >
+
+# Estructura del proyecto
+
+
+
+```
+├── conf
+├── dashboard
+│  ├── app.py
+│  ├── dash_data
+│  │  ├── logistic_regression.pkl
+│  │  ├── neural_network
+│  │  │  ├── assets
+│  │  │  ├── fingerprint.pb
+│  │  │  ├── keras_metadata.pb
+│  │  │  ├── saved_model.pb
+│  │  │  └── variables
+│  │  │     ├── variables.data-00000-of-00001
+│  │  │     └── variables.index
+│  │  └── processed_data_news.csv
+│  ├── dash_functions.py
+│  ├── Dockerfile
+│  ├── LDA_fake.html
+│  ├── LDA_true.html
+│  ├── pipeline_dash_data_generation.py
+│  └── pipeline_dash_models.py
+├── data.dvc
+├── datalab
+│  ├── AnalisisExploratorio_Modelos_FakeNews.ipynb
+│  ├── AnalisisExploratorioFakeNews.ipynb
+│  ├── BASELINE_ml.ipynb
+│  ├── feature_engineering.ipynb
+│  ├── hyperparameter_optimization.ipynb
+│  ├── mlflow_serving.ipynb
+│  ├── pre-processing.ipynb
+│  └── WebScrapping-Noticias-Fake.ipynb
+├── deploy
+├── docs
+│  ├── DVC_DOCS.md
+│  ├── experiment_tracking_DOCS.md
+│  ├── img
+│  │  ├── mlflow_pipeline.jpg
+│  │  ├── pipeline_javeriana.png
+│  │  └── sample_dash.png
+│  ├── pipeline.md
+│  ├── pipenv_DOCS.md
+│  └── streamlit_dashboardDOCS.md
+├── LICENSE
+├── Pipfile
+├── Pipfile.lock
+├── README.md
+├── requirements.txt
+└── src
+   ├── libs
+   │  ├── __init__.py
+   │  ├── configs.py
+   │  ├── embeddings.py
+   │  ├── mlflow_utils.py
+   │  ├── nlp_package
+   │  │  ├── README.md
+   │  │  └── setup.py
+   │  ├── topic_modeling.py
+   │  └── utils.py
+   ├── pipeline_preprocessing.py
+   ├── pipeline_training_full.py
+   └── tests
+
+```
 
 # Proceso de ejecución y despliegue
 
-- El proceso de ejecucion del pipeline se puede encontrar  [aqui](./docs/pipeline.md)
-- El despliegue del dashboard esta documentado [aqui](./docs/streamlit_dashboardDOCS.md)
+- El proceso de ejecución del pipeline se puede encontrar  [aquí](./docs/pipeline.md)
+- El despliegue del dashboard está documentado [aquí](./docs/streamlit_dashboardDOCS.md)
 # Requerimientos
 
-Los modulos usados se encuentran en el archivo `Pipfile`
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white) ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white) ![mlflow](https://img.shields.io/badge/mlflow-%23d9ead3.svg?style=for-the-badge&logo=numpy&logoColor=blue)
+
+
+
+Los modulos y versiones usadas se encuentran en los archivos `Pipfile` y `Pipfile.lock` 
 # Errores conocidos
 
 Sin errores conocidos por el momento
@@ -72,13 +144,6 @@ Sin errores conocidos por el momento
 | Noticas falsas | 296 archivos en formato .txt, individuales, nombrados con el titular de la noticia y cuya primera línea de contenido también incluye dicho texto.  |
 | Noticias verídicas  | 237 archivos en formato .txt, individuales, nombrados con el titular de la noticia y cuya primera línea de contenido también incluye dicho texto.  |
 
-
-## Detalles técnicos
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-
-* El proyecto se desarrolló en python `3.10`
-* 
-
 ## Resultados
 
 [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1O0JwJDY9iK6ctFNng0v03WkwsSOSR3zo?usp=sharing)
@@ -87,6 +152,8 @@ Sin errores conocidos por el momento
 ## Pontificia Universidad Javeriana
 ## Proyecto de Grado
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Javeriana.svg/1200px-Javeriana.svg.png" width = "300" class="center" >
+
+<img src="https://d66g242coom4e.cloudfront.net/uploads/event_page/index_image/8670/thumb600_Screen_Shot_2019-05-08_at_11.23.10_AM.png" width = "300" class="center" >
 
 
 

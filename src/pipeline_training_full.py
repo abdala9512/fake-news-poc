@@ -144,7 +144,7 @@ class PipelineFakeNews:
         Returns:
             Dict: hiperparametros optimizados
         """
-        @optimize_auc(search_space=space, evals=1)
+        @optimize_auc(search_space=space, evals=15)
         def train_predict_lstm(search_space: Dict) -> Dict:
 
             search_space["VOCAB_SIZE"] = self.VOCAB_SIZE

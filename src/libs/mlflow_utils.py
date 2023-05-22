@@ -28,7 +28,7 @@ def get_artifact_uri_production() -> str:
 
 def search_best_model(
         experiment_names: List[str] = [MLFLOW_FAKE_NEWS_EXPERIMENT_NAME],
-        metric_name: str = "val_auc_1"
+        metric_name: str = "val_auc_15"
     ) -> str:
     """Search Best Run ID of given experiments
     """

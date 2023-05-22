@@ -8,3 +8,11 @@ La version productiva puede verse [aqui](https://abdala9512-fake-news-poc-dashbo
 
 ## Despliegue en local
 
+```
+pipenv shell
+streamlit run dashboard/app.py
+```
+
+Se abrira la aplicacion en `localhost:8501`
+
+<img src="img/sample_dash.png" width = "600" class="center" >

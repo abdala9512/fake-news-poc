@@ -1,5 +1,7 @@
 # Data Version control 
 
+DVC es una herramienta que permite hacer control de versiones a los datos, ademas de trabajar colaborativamente con las informacion generada por todos los miembros del equipo.
+
 ![](https://repository-images.githubusercontent.com/83878269/a5c64400-8fdd-11ea-9851-ec57bc168db5)
 
 ## Pasos para versionar datos
@@ -41,6 +43,4 @@ git push origin <branch-name>
 # push to DVC
 dvc push -r origin data
 ```
-
-### Para hacer pull de los datos
 

@@ -24,5 +24,5 @@ MLFLOW_TRACKING_PASSWORD=********************************
 4. Ejecutar `pipeline_training_full.py
 
 ```
-python src/pipeline_training_full.py
+pipenv run python src/pipeline_training_full.py
 ```

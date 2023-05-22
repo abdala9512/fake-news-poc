@@ -104,8 +104,20 @@ train_baseline()
 
 ## Visualización de resultados
 
-Ahora podemos analizar y comparar modelos que generamos desde MLflow
+Ahora podemos analizar y comparar modelos que generamos desde MLflow. El panel es visibible en este [enlace](https://dagshub.com/abdala9512/fake-news-poc.mlflow)
 
 ![image](https://user-images.githubusercontent.com/42754537/229382148-50634257-022d-45db-a323-7221880a4100.png)
 
 # Estrategias Optimizacion de Hiperparametros
+
+Para la optimizacion de hiperparametros se usan el libreria [hyperopt](http://hyperopt.github.io/hyperopt/) con `15` ejecuciones, con un espacio de busqueda definido por el modelo usado.
+
+<img src="img/mlflow_pipeline.jpg" width = "600" class="center" >
+
+# Pipeline de experimentation y puesta en produccion de modelos
+
+1. Se ejecuta pipeline de tranining
+2. Se carga ejecucion de experimento en MLFlow
+3. Se obtiene de toda la lista de ejecuciones el modelo con el mejor AUC
+4. Se registra el mejor modelo
+5. Se promueve a produccion el mejor modelo
