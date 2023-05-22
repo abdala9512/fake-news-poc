@@ -151,9 +151,7 @@ Sin errores conocidos por el momento
 # Maestría Analítica para la inteligencia de negocios
 ## Pontificia Universidad Javeriana
 ## Proyecto de Grado
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Javeriana.svg/1200px-Javeriana.svg.png" width = "300" class="center" >
-
-<img src="https://d66g242coom4e.cloudfront.net/uploads/event_page/index_image/8670/thumb600_Screen_Shot_2019-05-08_at_11.23.10_AM.png" width = "300" class="center" >
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Javeriana.svg/1200px-Javeriana.svg.png" width = "250" class="center" > <img src="https://d66g242coom4e.cloudfront.net/uploads/event_page/index_image/8670/thumb600_Screen_Shot_2019-05-08_at_11.23.10_AM.png" width = "300" class="center" >
 
 
 
