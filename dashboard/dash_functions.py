@@ -13,10 +13,10 @@ from nltk.stem import SnowballStemmer
 import string
 from tensorflow.keras.preprocessing.text import Tokenizer
 import tensorflow as tf
-from ast import literal_eval
 import mlflow
 
 import sys
+import os 
 
 sys.path.append("./src")
 from libs.configs import (MLFLOW_FAKE_NEWS_MODEL_NAME)

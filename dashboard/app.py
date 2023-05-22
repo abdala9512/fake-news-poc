@@ -7,6 +7,7 @@ from wordcloud import WordCloud
 from nltk.corpus import stopwords
 import nltk
 import sys
+import os
 
 sys.path.append("./src")
 from libs.configs import MLFLOW_TRACKING_URI
@@ -17,6 +18,11 @@ mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 
 nltk.download('stopwords')
 nltk.download('punkt')
+
+
+os.environ["MLFLOW_TRACKING_USERNAME"] = st.secrets["MLFLOW_TRACKING_USERNAME"]
+os.environ["MLFLOW_TRACKING_PASSWORD"] = st.secrets["MLFLOW_TRACKING_PASSWORD"]
+
 
 # Configs
 st.set_page_config(layout="wide")
