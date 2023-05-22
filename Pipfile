@@ -23,6 +23,7 @@ statsmodels = "*"
 tensorflow = "*"
 importlib-resources = "*"
 keras = "*"
+python-dotenv = "*"
 
 [dev-packages]
 jupyterlab = "*"

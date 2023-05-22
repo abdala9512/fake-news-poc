@@ -1,6 +1,6 @@
 
 # PATHS
-DATA_FOLDER = "../data/data_fake_news/"
+DATA_FOLDER = "./data/data_fake_news"
 PREPROCESSED_DATA = f"{DATA_FOLDER}/preprocessed_data.csv"
 
 
