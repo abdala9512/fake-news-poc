@@ -27,6 +27,8 @@ python-dotenv = "*"
 
 [dev-packages]
 jupyterlab = "*"
+ipykernel = "*"
+black = "*"
 
 [requires]
 python_version = "3.10.0"

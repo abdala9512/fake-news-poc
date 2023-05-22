@@ -5,7 +5,6 @@ from sklearn.manifold import TSNE
 from umap import UMAP
 from typing import Any, Dict, List
 import pandas as pd
-import pickle
 
 from sklearn.preprocessing import LabelBinarizer
 from nltk.corpus import stopwords
@@ -13,9 +12,18 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import SnowballStemmer
 import string
 from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
 import tensorflow as tf
 from ast import literal_eval
+import mlflow
+
+import sys
+
+sys.path.append("./src")
+from libs.configs import (MLFLOW_FAKE_NEWS_MODEL_NAME)
+from libs.mlflow_utils import get_artifact_uri_production
+
+BEST_PARAMS_ARTIFACT_PATH = f"{get_artifact_uri_production()}/best_params.json"
+BEST_PARAMS = mlflow.artifacts.load_dict(BEST_PARAMS_ARTIFACT_PATH)
 
 def get_completion(prompt: str, model="gpt-3.5-turbo"):
     messages = [{"role": "user", "content": prompt}]
@@ -83,8 +91,6 @@ tf_tokenizer = Tokenizer()
 fit_text = [" ".join(data["text_tokenized"])]
 tf_tokenizer.fit_on_texts(fit_text)
 
-MAX_LEN = 100
-
 def text_to_index(text):
     """Convierte un texto a una secuencia de indices"""
     return [ tf_tokenizer.word_index[word] for word in text.split(" ")]
@@ -92,7 +98,7 @@ def text_to_index(text):
 
 def predict_news(text: str, probs_dict: Dict = {}) -> str:
     
-    nn_model = tf.keras.models.load_model("dashboard/dash_data/neural_network/")
+    nn_model = mlflow.tensorflow.load_model(model_uri=f"models:/{MLFLOW_FAKE_NEWS_MODEL_NAME}/Production",)
 
     tokenized = " ".join([
         word for word in process_text(text.lower()).split(" ")
@@ -100,7 +106,7 @@ def predict_news(text: str, probs_dict: Dict = {}) -> str:
        ])
 
     vector_ = tf.keras.preprocessing.sequence.pad_sequences( 
-          np.array(text_to_index(tokenized)).reshape(1,-1),  maxlen=MAX_LEN
+          np.array(text_to_index(tokenized)).reshape(1,-1),  maxlen=BEST_PARAMS["MAXLEN"]
        )
 
     return nn_model.predict(vector_)

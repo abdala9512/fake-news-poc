@@ -57,13 +57,14 @@ Construir un modelo de clasificación de noticias asociadas a COVID-19 con metri
 
 # Proceso de ejecución y despliegue
 
+- El proceso de ejecucion del pipeline se puede encontrar  [aqui](./docs/pipeline.md)
+- El despliegue del dashboard esta documentado [aqui](./docs/streamlit_dashboardDOCS.md)
 # Requerimientos
 
-# Ejemplos de código
-
-# Instalación y condiguración
-
+Los modulos usados se encuentran en el archivo `Pipfile`
 # Errores conocidos
+
+Sin errores conocidos por el momento
 ## Datos
 
 | Nombre de la fuente | Descripción y características  |

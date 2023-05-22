@@ -108,3 +108,4 @@ Ahora podemos analizar y comparar modelos que generamos desde MLflow
 
 ![image](https://user-images.githubusercontent.com/42754537/229382148-50634257-022d-45db-a323-7221880a4100.png)
 
+# Estrategias Optimizacion de Hiperparametros

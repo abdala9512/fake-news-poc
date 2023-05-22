@@ -1,7 +1,7 @@
 """Pipeline - Entrenamiento Modelo Fakenews"""
 import mlflow
 import pandas as pd
-from libs.configs import MLFLOW_TRACKING_URI, DATA_FOLDER
+from libs.configs import MLFLOW_TRACKING_URI, DATA_FOLDER, MLFLOW_FAKE_NEWS_EXPERIMENT_NAME
 from typing import Dict, Any, Tuple
 from hyperopt import STATUS_OK, Trials, fmin, hp, tpe, space_eval
 from sklearn.metrics import roc_auc_score
@@ -15,7 +15,7 @@ from sklearn.preprocessing import LabelBinarizer
 from libs.utils import process_text
 from typing import Callable
 import numpy as np
-
+import json
 from dotenv import load_dotenv
 
 load_dotenv()  # take environment variables from .env.
@@ -144,7 +144,7 @@ class PipelineFakeNews:
         Returns:
             Dict: hiperparametros optimizados
         """
-        @optimize_auc(search_space=space, evals=2)
+        @optimize_auc(search_space=space, evals=1)
         def train_predict_lstm(search_space: Dict) -> Dict:
 
             search_space["VOCAB_SIZE"] = self.VOCAB_SIZE
@@ -182,6 +182,7 @@ class PipelineFakeNews:
             parameters (Dict): hiperparametros del modelo
         """
         mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
+        mlflow.set_experiment(MLFLOW_FAKE_NEWS_EXPERIMENT_NAME)
         mlflow.tensorflow.autolog()
         with mlflow.start_run():
             parameters["VOCAB_SIZE"] = self.VOCAB_SIZE
@@ -205,6 +206,7 @@ class PipelineFakeNews:
                 epochs=parameters["EPOCHS"],
                 validation_data=(self.X_test, self.y_test),
             )
+            mlflow.log_dict(parameters, "best_params.json")
         mlflow.end_run()
 
     def run(self):

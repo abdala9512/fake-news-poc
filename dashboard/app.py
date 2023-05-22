@@ -6,7 +6,13 @@ import plotly.express as px
 from wordcloud import WordCloud
 from nltk.corpus import stopwords
 import nltk
-import pickle
+import sys
+
+sys.path.append("./src")
+from libs.configs import MLFLOW_TRACKING_URI
+import mlflow
+mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
+
 #from dash_functions import generate_embeddings_2d
 
 nltk.download('stopwords')
@@ -161,6 +167,8 @@ st.markdown(
 """
 )
 
+
+
 # word cloud with random data
 left_info_img, right_info_img = st.columns(2)
 
@@ -293,7 +301,6 @@ En esta sección se presenta el clasificador de noticias falsas y verdaderas.
 
 news_input_text = st.text_area("Noticia",height=200)
 from dash_functions import predict_news
-
 try:
     st.markdown(f"""
     #### La noticia tiene una probabilidad de ser falsa del : {round((1- predict_news(news_input_text)[0][0]) * 100,2)}%
