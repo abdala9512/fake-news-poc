@@ -10,10 +10,6 @@ from typing import Dict, Any, Tuple
 from hyperopt import STATUS_OK, Trials, fmin, hp, tpe, space_eval
 from sklearn.metrics import (
     roc_auc_score,
-    accuracy_score,
-    precision_score,
-    f1_score,
-    recall_score,
 )
 
 from sklearn.model_selection import train_test_split
@@ -206,7 +202,14 @@ class PipelineFakeNews:
             nn_model.compile(
                 optimizer=parameters["OPTIMIZER"],
                 loss=tf.keras.losses.BinaryCrossentropy(),
-                metrics=[tf.keras.metrics.AUC()],
+                metrics=[
+                    tf.keras.metrics.AUC(),
+                    tf.keras.metrics.Recall(),
+                    tf.keras.metrics.Precision(),
+                    tf.keras.metrics.FalsePositives(),
+                    tf.keras.metrics.FalseNegatives(),
+                    tf.keras.metrics.Accuracy(),
+                ],
             )
 
             history = nn_model.fit(
@@ -217,18 +220,6 @@ class PipelineFakeNews:
                 validation_data=(self.X_test, self.y_test),
             )
             _predictions = nn_model.predict(self.X_test)
-            mlflow.log_metrics(
-                {
-                    "precision",
-                    precision_score(self.y_test, _predictions),
-                    "recall",
-                    recall_score(self.y_test, _predictions),
-                    "f1",
-                    f1_score(self.y_test, _predictions),
-                    "accuracy",
-                    accuracy_score(self.y_test, _predictions),
-                }
-            )
             mlflow.log_dict(parameters, "best_params.json")
         mlflow.end_run()
 
