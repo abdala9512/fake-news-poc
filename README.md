@@ -31,25 +31,23 @@ En relación con las ventajas, se destaca principalmente:
 Ahora bien, algunas de las desventajas y/o potenciales retos se encuentran definidos por:
 *	Sesgo del modelo: Teniendo en cuenta la primera fase, de recopilación de noticias. La mayoría de los problemas de NLP se encuentran expuestos a contener sesgos.
 * Entendimiento de contexto: Los modelos de NLP en algunas ocasiones tienen dificultades para comprender correctamente el uso de una palabra según su contexto, por lo que algunas veces pueden inducir a un resultado impuntual.
-### Objetivo General - Negocio
+### Objetivo General
 
-Desarrollar un modelo de clasificación automática de noticias asociadas a COVID-19 que facilite el proceso pedagógico de formación de los estudiantes y actualización de los docentes de la  Faculta de Comunicación y Lenguaje de la Universidad Javeriana.
+Desarrollar un modelo analítico para la clasificación e identificación de noticias falsas relacionadas con el COVID-19, plasmado en una guía pedagógica que apoye la formación de estudiantes y la actualización de docentes de la Facultad de Comunicación y Lenguaje de la Universidad Javeriana.
 
-### Objetivos Específicos - Negocio
+### Objetivos Específicos
 
-- Describir las tecnicas analíticas de procesamiento de lenguaje natural y machine learning utilizadas para el proceso de clasificación de noticias.
-- Listar los elementos característicos identificados en el proceso que permiten la segregación de noticias.
-- Plantear un posible impacto social de los sistemas de clasificación de noticias.
+1.	Procesar y explorar descriptivamente el conjunto de noticias recolectadas por la Facultad de Comunicación y Lenguaje de la Universidad Javeriana, identificando patrones y características relevantes en la diferenciación entre noticias verdaderas y falsas.
 
-### Objetivo General de Minería
+2.	Desarrollar algoritmos de clasificación mediante la aplicación de técnicas de procesamiento de lenguaje natural y aprendizaje automático, que permitan la identificación y análisis de noticias relacionadas con el COVID-19.
 
-Construir un modelo de clasificación de noticias asociadas a COVID-19 con metricas de desempeño superior a un clasificador ingenuo. Accuracy superior al 50%.
+3.	Traducir el desarrollo de la solución analítica de clasificación de noticias en una guía pedagógica que facilite la comprensión de las técnicas de procesamiento de lenguaje natural y los modelos predictivos por parte de estudiantes y docentes.
 
-### Objetivos Específicos de Minería
+4.	Establecer un repositorio de proyecto que posibilite el intercambio académico y la transferencia de conocimientos entre estudiantes y docentes.
 
-- Explorar técnicas complementarias que permitan ampliar el volumen de información báse para el desarrollo del modelo.
-- Implementar diversas tecnicas de procesamiento de lenguaje natural y machine learning en la construcción del modelo de clasificación.
-- Superar en 10 puntos porcentuales un clasificador ingenuo.
+5.	Explorar el uso del web scraping como técnica complementaria para ampliar el volumen de información.
+
+
 
 # Arquitectura de la solución
 
