@@ -1,10 +1,20 @@
 """Pipeline - Entrenamiento Modelo Fakenews"""
 import mlflow
 import pandas as pd
-from libs.configs import MLFLOW_TRACKING_URI, DATA_FOLDER, MLFLOW_FAKE_NEWS_EXPERIMENT_NAME
+from libs.configs import (
+    MLFLOW_TRACKING_URI,
+    DATA_FOLDER,
+    MLFLOW_FAKE_NEWS_EXPERIMENT_NAME,
+)
 from typing import Dict, Any, Tuple
 from hyperopt import STATUS_OK, Trials, fmin, hp, tpe, space_eval
-from sklearn.metrics import roc_auc_score
+from sklearn.metrics import (
+    roc_auc_score,
+    accuracy_score,
+    precision_score,
+    f1_score,
+    recall_score,
+)
 
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.layers import LSTM, Dense, Dropout, Embedding, Input
@@ -15,7 +25,6 @@ from sklearn.preprocessing import LabelBinarizer
 from libs.utils import process_text
 from typing import Callable
 import numpy as np
-import json
 from dotenv import load_dotenv
 
 load_dotenv()  # take environment variables from .env.
@@ -25,9 +34,9 @@ LSTM_SEARCH_SPACE = {
     "EMBED_DIM": hp.choice("EMBED_DIM", [32, 64, 128]),
     "LSTM_SIZE": hp.choice("LSTM_SIZE", [32, 64, 128]),
     "DENSE_SIZE": hp.choice("DENSE_SIZE", [32, 64, 128]),
-    "DROPOUT": hp.uniform("DROPOUT", 0.1, 0.5),
+    "DROPOUT": hp.choice("DROPOUT", [0.1, 0.25, 0.5]),
     "BATCH_SIZE": hp.choice("BATCH_SIZE", [32, 64, 128]),
-    "EPOCHS": hp.choice("EPOCHS", [10, 20, 30]),
+    "EPOCHS": hp.choice("EPOCHS", [10, 15, 20, 30]),
     "OPTIMIZER": hp.choice("OPTIMIZER", ["adam", "rmsprop"]),
 }
 
@@ -144,6 +153,7 @@ class PipelineFakeNews:
         Returns:
             Dict: hiperparametros optimizados
         """
+
         @optimize_auc(search_space=space, evals=15)
         def train_predict_lstm(search_space: Dict) -> Dict:
 
@@ -206,6 +216,19 @@ class PipelineFakeNews:
                 epochs=parameters["EPOCHS"],
                 validation_data=(self.X_test, self.y_test),
             )
+            _predictions = nn_model.predict(self.X_test)
+            mlflow.log_metrics(
+                {
+                    "precision",
+                    precision_score(self.y_test, _predictions),
+                    "recall",
+                    recall_score(self.y_test, _predictions),
+                    "f1",
+                    f1_score(self.y_test, _predictions),
+                    "accuracy",
+                    accuracy_score(self.y_test, _predictions),
+                }
+            )
             mlflow.log_dict(parameters, "best_params.json")
         mlflow.end_run()
 
@@ -221,7 +244,7 @@ class PipelineFakeNews:
 
 def main():
     """Funcion main para ejecutar pipeline"""
-    data = pd.read_csv(f"{DATA_FOLDER}/processed/processed_data_news.csv", sep="\t")
+    data = pd.read_csv(f"{DATA_FOLDER}/processed/reconstruidas_newsdf.csv", sep=",")
     # Elegir modelo
     pipeline = PipelineFakeNews(
         data=data, label="Tipo", text_col="Texto", search_space=LSTM_SEARCH_SPACE
